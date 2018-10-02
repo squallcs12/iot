@@ -17,9 +17,11 @@ from django.contrib import admin
 from django.http import HttpResponse
 from django.urls import path
 
+from esp8266.models import Light
+
 
 def data_view(request):
-    return HttpResponse('1')
+    return HttpResponse(str(int(Light.objects.first().status)))
 
 
 urlpatterns = [
