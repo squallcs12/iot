@@ -25,7 +25,7 @@ SECRET_KEY = '6*zoeihm=h6p7-kajt7kqyt!jixgcob8m__%5j@rn85he9nxwe'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['bang-iot.herokuapp.com']
 
 
 # Application definition
