@@ -1,0 +1,16 @@
+version: "3.3"
+
+services:
+  postgres:
+    image: mdillon/postgis:9.6
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: db
+    ports:
+      - "18688:5432"
+
+  redis:
+    image: redis:4.0
+    ports:
+      - "18689:6379"

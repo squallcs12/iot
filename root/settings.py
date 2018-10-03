@@ -15,10 +15,10 @@ import environ
 env = environ.Env(
     DEBUG=(bool, True),
     SECRET_KEY=(str, '*$+179-==kwp76$q2o684nz+0zkjtvk4t2k2m4+gk$$kdy4zk='),
-    DATABASE_URL=(str, 'postgresql://root:password@localhost:17066/db'),
-    REDIS_URL=(str, 'redis://localhost:17067/2'),
-    CACHE_URL=(str, 'rediscache://localhost:17067/0?client_class=django_redis.client.DefaultClient'),
-    CELERY_BROKER_URL=(str, 'redis://localhost:17067/1'),
+    DATABASE_URL=(str, 'postgresql://root:password@localhost:18688/db'),
+    REDIS_URL=(str, 'redis://localhost:18689/2'),
+    CACHE_URL=(str, 'rediscache://localhost:18689/0?client_class=django_redis.client.DefaultClient'),
+    CELERY_BROKER_URL=(str, 'redis://localhost:18689/1'),
     DEFAULT_FROM_EMAIL=(str, 'info@inspectorio.com'),
     SENTRY_DSN=(str, ''),
     ALLOWED_HOSTS=(str, '*'),
@@ -61,8 +61,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'channels',
+
     'accounts',
     'esp8266',
+    'chat',
 ]
 
 MIDDLEWARE = [
@@ -94,6 +97,15 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'root.wsgi.application'
+ASGI_APPLICATION = "root.routing.application"
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 18689)],
+        },
+    },
+}
 
 
 # Database

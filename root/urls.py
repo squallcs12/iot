@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.http import HttpResponse
-from django.urls import path
+from django.urls import path, include
 
 from esp8266.models import Light
 
@@ -27,4 +27,5 @@ def data_view(request):
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('data', data_view),
+    path('chat/', include('chat.urls')),
 ]
