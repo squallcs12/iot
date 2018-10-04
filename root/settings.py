@@ -19,6 +19,8 @@ env = environ.Env(
     REDIS_URL=(str, 'redis://localhost:18689/2'),
     CACHE_URL=(str, 'rediscache://localhost:18689/0?client_class=django_redis.client.DefaultClient'),
     CELERY_BROKER_URL=(str, 'redis://localhost:18689/1'),
+    CHANNEL_REDIS_HOST=(str, 'localhost'),
+    CHANNEL_REDIS_PORT=(str, '18689'),
     DEFAULT_FROM_EMAIL=(str, 'info@inspectorio.com'),
     SENTRY_DSN=(str, ''),
     ALLOWED_HOSTS=(str, '*'),
@@ -102,7 +104,7 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('127.0.0.1', 18689)],
+            "hosts": [(env('CHANNEL_REDIS_HOST'), int(env('CHANNEL_REDIS_PORT')))],
         },
     },
 }

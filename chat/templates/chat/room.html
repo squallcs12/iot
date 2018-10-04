@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <textarea id="chat-log" cols="100" rows="20" class="form-control"></textarea><br/>
-  <input id="chat-message-input" type="text" size="100" class="form-control"/><br/>
-  <input id="chat-message-submit" type="button" value="Send" class="btn btn-primary"/>
+  <button onclick="switchOn();">Bật</button>
+  <button onclick="switchOff();">Tắt</button>
   <script>
     var roomName = {{ room_name_json }};
 
@@ -21,21 +20,17 @@
       console.error('Chat socket closed unexpectedly');
     };
 
-    document.querySelector('#chat-message-input').focus();
-    document.querySelector('#chat-message-input').onkeyup = function (e) {
-      if (e.keyCode === 13) {  // enter, return
-        document.querySelector('#chat-message-submit').click();
-      }
-    };
-
-    document.querySelector('#chat-message-submit').onclick = function (e) {
-      var messageInputDom = document.querySelector('#chat-message-input');
-      var message = messageInputDom.value;
+    function switchOn () {
       chatSocket.send(JSON.stringify({
-        'message': message
+        'message': '12'
       }));
+    }
 
-      messageInputDom.value = '';
-    };
+    function switchOff () {
+      chatSocket.send(JSON.stringify({
+        'message': '02'
+      }));
+    }
+
   </script>
 {% endblock %}
